@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="凪琉的二次元个人主页 · 主推角色 / 游戏 / 番剧 / 社交 · 欢迎扩扩 ✧">
+<title>凪琉 ✧ 个人主页</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%238b88ff'/><stop offset='.6' stop-color='%23ef6bab'/><stop offset='1' stop-color='%23e8b45a'/></linearGradient></defs><rect width='100' height='100' rx='26' fill='url(%23g)'/><text x='50' y='70' font-size='54' text-anchor='middle' fill='%2312142e' font-weight='bold'>凪</text></svg>">
+<style>
+/* ==================== 基础与配色（二次元夜空 · 紫蓝×樱粉×琥珀金） ==================== */
+:root{
+  --bg-top:#0a0b1a;
+  --bg-bottom:#12142e;
+  --violet:#8b88ff;     /* 紫蓝 */
+  --violet-deep:#6b63e6;
+  --sakura:#ff9ecf;     /* 樱粉 */
+  --sakura-deep:#ef6bab;
+  --gold:#e8b45a;       /* 琥珀金 */
+  --gold-deep:#c9922f;
+  --danger:#ff6b81;     /* 雷点警示 */
+  --card:rgba(22,24,50,.66);
+  --text:#eceefc;
+  --sub:#9aa1c9;
+  --faint:#6b7199;
+  --radius:24px;
+  --grad-line:linear-gradient(135deg, rgba(139,136,255,.85) 0%, rgba(255,158,207,.85) 55%, rgba(232,180,90,.75) 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:
+    radial-gradient(900px 480px at 12% -6%, rgba(107,99,230,.22), transparent 62%),
+    radial-gradient(760px 420px at 88% 4%, rgba(239,107,171,.16), transparent 62%),
+    linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bottom) 58%,#0d0e22 100%);
+  background-attachment:fixed;
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(139,136,255,.35);color:#fff}
+img{max-width:100%}
+
+/* ==================== 漂浮装饰层：星星 / 光点 / 圆环 ==================== */
+.deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.star,.dust{position:absolute;color:var(--violet);will-change:transform,opacity;user-select:none}
+.star{animation:twinkle var(--dur,5s) ease-in-out infinite}
+.dust{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--sakura);filter:blur(1px);
+  animation:driftUp var(--dur,11s) linear infinite;
+}
+.ring{position:absolute;border-radius:50%;border:1.5px solid rgba(139,136,255,.16);animation:ringFloat 14s ease-in-out infinite}
+.ring.r-pink{border-color:rgba(255,158,207,.14)}
+.ring.r-gold{border-color:rgba(232,180,90,.13)}
+@keyframes twinkle{
+  0%,100%{opacity:.15;transform:scale(.72)}
+  50%{opacity:.95;transform:scale(1.12)}
+}
+@keyframes driftUp{
+  0%{transform:translateY(16px);opacity:0}
+  12%{opacity:.75}
+  85%{opacity:.35}
+  100%{transform:translateY(-110px);opacity:0}
+}
+@keyframes ringFloat{
+  0%,100%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(10px,-14px) rotate(180deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  .star,.dust,.ring{animation:none}
+  html{scroll-behavior:auto}
+}
+
+/* ==================== 顶部导航 ==================== */
+.nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:16px;
+  padding:12px clamp(14px,3vw,28px);
+  background:rgba(10,11,26,.68);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid rgba(139,136,255,.14);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:9px;
+  font-weight:800;font-size:16px;letter-spacing:1px;flex:none;
+}
+.nav-logo .mark{
+  width:32px;height:32px;border-radius:11px;
+  background:var(--grad-line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:#12142e;font-weight:800;
+  box-shadow:0 0 16px rgba(139,136,255,.4);
+}
+.nav-links{
+  display:flex;gap:4px;margin-left:auto;
+  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  font-size:13px;color:var(--sub);
+  padding:7px 13px;border-radius:999px;white-space:nowrap;
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:var(--text);background:rgba(139,136,255,.12)}
+
+/* ==================== 整体布局 ==================== */
+.page{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(16px,3vw,24px) 60px}
+
+/* ==================== Hero 区（多层渐变 + 装饰） ==================== */
+.hero{
+  position:relative;overflow:hidden;
+  border-radius:28px;
+  padding:clamp(36px,6vw,64px) clamp(22px,5vw,48px);
+  background:
+    radial-gradient(420px 260px at 18% 12%, rgba(139,136,255,.30), transparent 65%),
+    radial-gradient(380px 240px at 82% 18%, rgba(255,158,207,.22), transparent 65%),
+    radial-gradient(320px 220px at 62% 96%, rgba(232,180,90,.14), transparent 66%),
+    linear-gradient(160deg,#171a3d 0%,#12132d 48%,#0f1024 100%);
+  border:1px solid transparent;
+  background-clip:padding-box;
+  box-shadow:0 0 0 1px rgba(139,136,255,.18) inset, 0 24px 60px rgba(6,7,20,.6);
+  text-align:center;
+}
+/* Hero 内部装饰 */
+.hero .h-star{position:absolute;color:var(--gold);opacity:.5;animation:twinkle 6s ease-in-out infinite}
+.hero .h-ring{position:absolute;border-radius:50%;border:1.5px dashed rgba(255,158,207,.22);animation:ringFloat 16s ease-in-out infinite}
+.hero-avatar{
+  width:clamp(84px,13vw,110px);height:clamp(84px,13vw,110px);
+  margin:0 auto 20px;border-radius:34px;
+  background:linear-gradient(135deg,#8b88ff 0%,#ef6bab 58%,#e8b45a 130%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(34px,5.4vw,46px);font-weight:800;color:#12142e;
+  text-shadow:0 2px 8px rgba(255,255,255,.35);
+  box-shadow:0 0 34px rgba(239,107,171,.38), inset 0 1px 0 rgba(255,255,255,.4);
+}
+.hero-name{
+  font-size:clamp(40px,8vw,64px);font-weight:800;letter-spacing:6px;line-height:1.15;
+  background:linear-gradient(118deg,#c6c3ff 8%,#ff9ecf 52%,#e8b45a 96%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 22px rgba(139,136,255,.34));
+}
+.hero-en{margin-top:8px;font-size:clamp(12px,1.6vw,14px);letter-spacing:7px;color:var(--faint);text-transform:uppercase}
+.hero-sub{
+  margin:22px auto 0;max-width:520px;
+  font-size:clamp(13.5px,1.9vw,15.5px);color:var(--sub);line-height:1.9;
+}
+.hero-sub b{color:var(--sakura);font-weight:600}
+.hero-tags{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:22px}
+.hero-tags span{
+  font-size:12px;color:#d9d2ff;
+  background:rgba(139,136,255,.12);
+  border:1px solid rgba(139,136,255,.3);
+  padding:5px 14px;border-radius:999px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+/* CTA（glow 光晕） */
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14.5px;font-weight:700;letter-spacing:1px;
+  padding:13px 30px;border-radius:999px;cursor:pointer;border:none;
+  transition:transform .18s ease, box-shadow .25s ease, filter .25s ease;
+}
+.cta-main{
+  color:#12142e;
+  background:linear-gradient(120deg,#8b88ff 0%,#ef6bab 60%,#ffb3d4 110%);
+  box-shadow:0 0 26px rgba(239,107,171,.45), 0 8px 22px rgba(0,0,0,.35);
+}
+.cta-main:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(239,107,171,.62), 0 12px 28px rgba(0,0,0,.42);filter:saturate(120%)}
+.cta-ghost{
+  color:var(--gold);
+  background:rgba(232,180,90,.07);
+  border:1px solid rgba(232,180,90,.45);
+  box-shadow:0 0 18px rgba(232,180,90,.16);
+}
+.cta-ghost:hover{transform:translateY(-2px);background:rgba(232,180,90,.13);box-shadow:0 0 30px rgba(232,180,90,.3)}
+
+/* ==================== 通用板块卡片（渐变边框 + 大圆角） ==================== */
+.section{margin-top:clamp(26px,4vw,38px)}
+.card{
+  position:relative;border-radius:var(--radius);
+  background:
+    linear-gradient(rgba(20,22,46,.92),rgba(16,17,38,.92)) padding-box,
+    var(--grad-line) border-box;
+  border:1.4px solid transparent;
+  box-shadow:0 16px 44px rgba(5,6,18,.5);
+  padding:clamp(20px,3.4vw,30px);
+  transition:transform .22s ease, box-shadow .22s ease;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.card:hover{transform:translateY(-2px);box-shadow:0 22px 56px rgba(5,6,18,.62)}
+/* 板块标题行 */
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec-dot{
+  width:10px;height:10px;border-radius:4px;flex:none;
+  background:linear-gradient(135deg,var(--violet),var(--sakura));
+  box-shadow:0 0 12px rgba(239,107,171,.5);
+}
+.sec-title{font-size:17px;font-weight:800;letter-spacing:2px}
+.sec-en{font-size:10.5px;letter-spacing:3px;color:var(--faint);text-transform:uppercase;margin-left:2px}
+.sec-tail{margin-left:auto;font-size:11px;color:var(--gold);letter-spacing:1px;white-space:nowrap}
+.sec-tail .spark{opacity:.8}
+
+/* ==================== 内容组件 ==================== */
+/* 介绍信息格 */
+.grid-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.info-item{
+  border-radius:16px;padding:15px 16px;
+  background:rgba(139,136,255,.07);
+  border:1px solid rgba(139,136,255,.16);
+  transition:background .2s,border-color .2s;
+}
+.info-item:hover{background:rgba(139,136,255,.13);border-color:rgba(255,158,207,.34)}
+.info-item .k{font-size:11px;color:var(--faint);letter-spacing:2px;margin-bottom:6px}
+.info-item .v{font-size:14.5px;font-weight:600;color:#dfdefc}
+
+/* 徽章 chips（角色 / 番剧 / 游戏） */
+.chips{display:flex;flex-wrap:wrap;gap:11px}
+.chip{
+  position:relative;display:inline-flex;align-items:center;gap:9px;
+  padding:9px 17px 9px 10px;border-radius:999px;
+  background:rgba(255,158,207,.08);
+  border:1px solid rgba(255,158,207,.26);
+  font-size:13.5px;color:#ffd9ec;
+  transition:transform .18s ease, box-shadow .22s ease, background .2s;
+}
+.chip:hover{transform:translateY(-2px);box-shadow:0 0 18px rgba(255,158,207,.3);background:rgba(255,158,207,.14)}
+.chip .ico{
+  width:26px;height:26px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,var(--violet),var(--sakura));
+  color:#12142e;font-size:12px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+.chip.gold{background:rgba(232,180,90,.08);border-color:rgba(232,180,90,.34);color:#ffe3b5}
+.chip.gold:hover{box-shadow:0 0 18px rgba(232,180,90,.32);background:rgba(232,180,90,.14)}
+.chip.gold .ico{background:linear-gradient(135deg,#f2ca86,#c9922f)}
+.chip small{font-size:10.5px;color:var(--faint);letter-spacing:1px}
+
+/* CP 大卡 */
+.cp-box{
+  display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;
+  padding:26px 18px;border-radius:18px;
+  background:
+    radial-gradient(240px 130px at 30% 22%, rgba(139,136,255,.2), transparent 70%),
+    radial-gradient(240px 130px at 72% 80%, rgba(255,158,207,.18), transparent 70%),
+    rgba(255,158,207,.05);
+  border:1px dashed rgba(255,158,207,.35);
+}
+.cp-box .big{
+  font-size:clamp(30px,5.5vw,44px);font-weight:800;letter-spacing:8px;
+  background:linear-gradient(110deg,#b9b6ff,#ff9ecf 60%,#e8b45a 120%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 16px rgba(255,158,207,.35));
+}
+.cp-box .heart{font-size:20px;animation:pulse 2.4s ease-in-out infinite;color:var(--sakura)}
+.cp-box .note{width:100%;text-align:center;font-size:12px;color:var(--faint);letter-spacing:2px}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.22);opacity:1}}
+
+/* 游戏卡网格 */
+.grid-game{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:13px}
+.game-card{
+  border-radius:18px;padding:18px 16px;text-align:center;
+  background:rgba(139,136,255,.06);
+  border:1px solid rgba(139,136,255,.18);
+  transition:transform .18s ease, box-shadow .22s ease, border-color .2s;
+}
+.game-card:hover{transform:translateY(-3px);box-shadow:0 0 22px rgba(139,136,255,.28);border-color:rgba(255,158,207,.4)}
+.game-card .g-name{font-size:16.5px;font-weight:800;letter-spacing:2px;color:#e7e4ff}
+.game-card .g-full{font-size:11px;color:var(--faint);margin-top:5px;letter-spacing:1px}
+.game-card .g-tag{
+  display:inline-block;margin-top:11px;font-size:10.5px;
+  color:var(--gold);border:1px solid rgba(232,180,90,.4);
+  padding:2.5px 11px;border-radius:999px;
+}
+.game-card .g-tag.m{color:#9fd6ff;border-color:rgba(120,190,255,.4)}
+
+/* 社交条目 */
+.social-list{display:grid;gap:11px}
+.social-item{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 17px;border-radius:15px;
+  background:rgba(139,136,255,.06);
+  border:1px solid rgba(139,136,255,.15);
+  font-size:14px;color:#dedcf8;
+  transition:background .2s;
+}
+.social-item:hover{background:rgba(139,136,255,.12)}
+.social-item .sym{
+  width:28px;height:28px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+  background:linear-gradient(135deg,rgba(139,136,255,.35),rgba(255,158,207,.35));
+  border:1px solid rgba(255,158,207,.3);
+}
+.social-item em{font-style:normal;margin-left:auto;font-size:10.5px;color:var(--faint);letter-spacing:2px}
+
+/* 雷点（醒目警示） */
+.mine-box{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  padding:24px 22px;border-radius:18px;
+  background:
+    radial-gradient(260px 140px at 12% 20%, rgba(255,107,129,.16), transparent 70%),
+    linear-gradient(rgba(30,16,28,.94),rgba(24,14,24,.94)) padding-box,
+    linear-gradient(120deg,rgba(255,107,129,.9),rgba(255,158,207,.75)) border-box;
+  border:1.6px solid transparent;
+}
+.mine-box .warn{font-size:30px;filter:drop-shadow(0 0 12px rgba(255,107,129,.5))}
+.mine-box .m-big{
+  font-size:clamp(24px,4.5vw,34px);font-weight:800;letter-spacing:5px;color:#ffb3c0;
+  text-shadow:0 0 22px rgba(255,107,129,.55);
+}
+.mine-box .m-note{flex-basis:100%;font-size:12.5px;color:#c78a97;letter-spacing:1.5px;line-height:1.8}
+
+/* 联系卡片（微信 + 邮箱 并列） */
+.grid-contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+.contact-card{
+  border-radius:20px;padding:22px 20px;
+  background:
+    linear-gradient(rgba(20,22,46,.94),rgba(16,17,38,.94)) padding-box,
+    linear-gradient(135deg,rgba(255,158,207,.75),rgba(139,136,255,.75)) border-box;
+  border:1.4px solid transparent;
+  transition:transform .2s ease, box-shadow .25s ease;
+}
+.contact-card:hover{transform:translateY(-3px);box-shadow:0 0 30px rgba(255,158,207,.3)}
+.contact-card h3{display:flex;align-items:center;gap:9px;font-size:14.5px;letter-spacing:2px;color:#ffd9ec}
+.contact-card h3 .cs{
+  width:30px;height:30px;border-radius:11px;flex:none;
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+  background:linear-gradient(135deg,rgba(255,158,207,.3),rgba(139,136,255,.3));
+  border:1px solid rgba(255,158,207,.35);
+}
+.contact-card .val{
+  margin-top:13px;font-size:15px;font-weight:600;color:#e9e8ff;
+  word-break:break-all;line-height:1.6;min-height:1.6em;
+}
+.contact-card .row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btn-mini{
+  font-size:12px;font-weight:600;cursor:pointer;border:none;
+  padding:8px 18px;border-radius:999px;letter-spacing:1px;
+  transition:box-shadow .2s, transform .18s;
+}
+.btn-copy{
+  color:#12142e;
+  background:linear-gradient(120deg,#ff9ecf,#8b88ff);
+  box-shadow:0 0 14px rgba(239,107,171,.35);
+}
+.btn-copy:hover{transform:translateY(-1px);box-shadow:0 0 24px rgba(239,107,171,.55)}
+.btn-go{
+  color:var(--gold);background:rgba(232,180,90,.08);
+  border:1px solid rgba(232,180,90,.5);box-shadow:0 0 12px rgba(232,180,90,.14);
+}
+.btn-go:hover{transform:translateY(-1px);box-shadow:0 0 22px rgba(232,180,90,.3)}
+
+/* toast */
+#toast{
+  position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);
+  z-index:99;opacity:0;pointer-events:none;
+  background:rgba(18,20,46,.9);
+  border:1px solid rgba(255,158,207,.5);
+  border-radius:999px;padding:10px 24px;
+  font-size:13px;color:#ffd9ec;letter-spacing:1px;
+  box-shadow:0 0 28px rgba(239,107,171,.35);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:opacity .28s ease, transform .28s ease;
+}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ==================== 页脚 ==================== */
+.footer{
+  margin-top:clamp(36px,5vw,52px);text-align:center;
+  font-size:11.5px;color:var(--faint);line-height:2.1;letter-spacing:1px;
+}
+.footer .fx{color:var(--sakura);opacity:.8}
+.footer .gx{color:var(--gold);opacity:.85}
+
+/* ==================== 响应式 ==================== */
+@media (max-width:640px){
+  .hero{border-radius:22px;padding:34px 18px}
+  .hero-name{letter-spacing:4px}
+  .nav{gap:10px}
+  .nav-links a{padding:6px 10px;font-size:12px}
+  .cp-box .big{letter-spacing:5px}
+  .page{padding-bottom:calc(52px + env(safe-area-inset-bottom))}
+}
+/* 桌面滚动条 */
+@media (min-width:900px){
+  ::-webkit-scrollbar{width:11px}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(139,136,255,.4),rgba(255,158,207,.4));border-radius:6px;border:3px solid transparent;background-clip:padding-box}
+  ::-webkit-scrollbar-track{background:#0c0d1f}
+}
+</style>
+</head>
+<body>
+
+<!-- 漂浮装饰层（JS 生成星星与光点） -->
+<div class="deco" id="deco">
+  <div class="ring" style="width:240px;height:240px;top:12%;left:-80px"></div>
+  <div class="ring r-pink" style="width:170px;height:170px;top:64%;right:-54px;animation-delay:-5s"></div>
+  <div class="ring r-gold" style="width:120px;height:120px;top:34%;right:10%;animation-delay:-9s"></div>
+</div>
+
+<!-- 导航 -->
+<nav class="nav">
+  <a class="nav-logo" href="#top"><span class="mark">凪</span>凪琉</a>
+  <div class="nav-links">
+    <a href="#about">介绍</a>
+    <a href="#oshi">主推</a>
+    <a href="#game">游戏</a>
+    <a href="#anime">番剧</a>
+    <a href="#social">社交</a>
+    <a href="#contact">联系</a>
+  </div>
+</nav>
+
+<div class="page" id="top">
+
+  <!-- ========== Hero ========== -->
+  <header class="hero" id="hero">
+    <div class="hero-avatar">凪</div>
+    <h1 class="hero-name">凪琉</h1>
+    <div class="hero-en">NAGIRU · ONLINE</div>
+    <p class="hero-sub">宁夏银川 · 打工人 | <b>抽象搞笑女</b> · 高P二刺辕<br>认真搞二次元，快乐当社畜 ✧</p>
+    <div class="hero-tags">
+      <span>INPF</span><span>抽象搞笑女</span><span>高P二刺辕</span><span>端游玩家</span><span>想出c</span>
+    </div>
+    <div class="hero-cta">
+      <button class="cta cta-main" id="ctaWx">✧ 加微信扩扩</button>
+      <a class="cta cta-ghost" href="mailto:2794049147@qq.com">✉ 写邮件给我</a>
+    </div>
+  </header>
+
+  <!-- ========== 关于我 ========== -->
+  <section class="section" id="about">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot"></span>
+        <span class="sec-title">我的介绍</span>
+        <span class="sec-en">About Me</span>
+        <span class="sec-tail">银川 · 坐标系 <span class="spark">✧</span></span>
+      </div>
+      <div class="grid-info">
+        <div class="info-item"><div class="k">坐标</div><div class="v">宁夏银川</div></div>
+        <div class="info-item"><div class="k">属性</div><div class="v">打工人</div></div>
+        <div class="info-item"><div class="k">MBTI</div><div class="v">INPF</div></div>
+        <div class="info-item"><div class="k">画风</div><div class="v">抽象搞笑女</div></div>
+        <div class="info-item"><div class="k">浓度</div><div class="v">高P二刺辕</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 主推角色 ========== -->
+  <section class="section" id="oshi">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot"></span>
+        <span class="sec-title">主推角色</span>
+        <span class="sec-en">My Oshi</span>
+        <span class="sec-tail">本命浓度超高 <span class="spark">★</span></span>
+      </div>
+      <div class="chips">
+        <span class="chip gold"><span class="ico">五</span>五条悟</span>
+        <span class="chip gold"><span class="ico">土</span>土御门胡桃</span>
+        <span class="chip gold"><span class="ico">雷</span>雷兹</span>
+        <span class="chip gold"><span class="ico">艾</span>艾斯德斯</span>
+        <span class="chip gold"><span class="ico">玛</span>玛奇玛</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CP向 ========== -->
+  <section class="section" id="cp">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot"></span>
+        <span class="sec-title">CP向</span>
+        <span class="sec-en">My Ship</span>
+        <span class="sec-tail">唯一真神 <span class="spark">♥</span></span>
+      </div>
+      <div class="cp-box">
+        <span class="big">太中</span>
+        <span class="heart">♥</span>
+        <span class="note">双向奔赴 · 永远信赖 · 永远磕生磕死</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 游戏 ========== -->
+  <section class="section" id="game">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot"></span>
+        <span class="sec-title">游戏</span>
+        <span class="sec-en">Gaming</span>
+        <span class="sec-tail">端游居多 <span class="spark">⌨</span></span>
+      </div>
+      <div class="grid-game">
+        <div class="game-card"><div class="g-name">崩铁</div><div class="g-full">崩坏：星穹铁道</div><span class="g-tag m">手游</span></div>
+        <div class="game-card"><div class="g-name">瓦</div><div class="g-full">无畏契约</div><span class="g-tag">端游</span></div>
+        <div class="game-card"><div class="g-name">劫</div><div class="g-full">永劫无间</div><span class="g-tag">端游</span></div>
+        <div class="game-card"><div class="g-name">LOL</div><div class="g-full">英雄联盟</div><span class="g-tag">端游</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 主推番剧 ========== -->
+  <section class="section" id="anime">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot"></span>
+        <span class="sec-title">主推番剧</span>
+        <span class="sec-en">Favorites</span>
+        <span class="sec-tail">入股不亏 <span class="spark">✦</span></span>
+      </div>
+      <div class="chips">
+        <span class="chip"><span class="ico">咒</span>咒术</span>
+        <span class="chip"><span class="ico">巨</span>巨人</span>
+        <span class="chip"><span class="ico">史</span>史莱姆</span>
+        <span class="chip"><span class="ico">间</span>间谍过家家</span>
+        <span class="chip"><span class="ico">小</span>小林家</span>
+        <span class="chip"><span class="ico">鬼</span>鬼灭</span>
+        <span class="chip"><span class="ico">马</span>马修</span>
+        <span class="chip"><span class="ico">百</span>百妖谱</span>
+        <span class="chip"><span class="ico">蛛</span>蜘蛛子</span>
+        <span class="chip"><span class="ico">魔</span>打工吧魔王大人</span>
+        <span class="chip"><span class="ico">斩</span>斩瞳</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 小说 / 漫画 ========== -->
+  <section class="section" id="comic">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot"></span>
+        <span class="sec-title">小说 / 漫画</span>
+        <span class="sec-en">Reading</span>
+        <span class="sec-tail">杂食雷达 <span class="spark">✎</span></span>
+      </div>
+      <div class="cp-box" style="border-style:solid;border-color:rgba(139,136,255,.28)">
+        <span class="big" style="letter-spacing:10px">涉及广泛</span>
+        <span class="note">粮仓很杂 · 各类型均有所涉猎 · 欢迎安利</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 社交 ========== -->
+  <section class="section" id="social">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot"></span>
+        <span class="sec-title">社交</span>
+        <span class="sec-en">Social</span>
+        <span class="sec-tail">扩扩通道开放中 <span class="spark">✧</span></span>
+      </div>
+      <div class="social-list">
+        <div class="social-item"><span class="sym">✦</span>二三次不分号<em>ONE FOR ALL</em></div>
+        <div class="social-item"><span class="sym">✉</span>主微信日常冲浪<em>MAIN</em></div>
+        <div class="social-item"><span class="sym">＋</span>欢迎扩扩<em>Welcome</em></div>
+        <div class="social-item"><span class="sym">♥</span>深交亲友位长期招募<em>Friends</em></div>
+        <div class="social-item"><span class="sym">★</span>想出c<em>Cosplay</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 雷点（醒目） ========== -->
+  <section class="section" id="mine">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot" style="background:linear-gradient(135deg,#ff6b81,#ff9ecf);box-shadow:0 0 12px rgba(255,107,129,.55)"></span>
+        <span class="sec-title" style="color:#ffb3c0">雷点提示</span>
+        <span class="sec-en">Please Note</span>
+        <span class="sec-tail" style="color:#ff8a9b">重要 · 务必阅读 <span class="spark">⚠</span></span>
+      </div>
+      <div class="mine-box">
+        <span class="warn">⚠</span>
+        <span class="m-big">我推性转</span>
+        <span class="m-note">雷点预警：不接受我推角色性转相关内容（同人文 / 图 / 玩梗均雷），刷到请自觉避开，请勿向我提及或推送，感谢理解 ✧</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 联系方式（微信 + 邮箱 并列） ========== -->
+  <section class="section" id="contact">
+    <div class="card">
+      <div class="sec-head">
+        <span class="sec-dot"></span>
+        <span class="sec-title">找到我</span>
+        <span class="sec-en">Contact</span>
+        <span class="sec-tail">扩列找我 <span class="spark">✉</span></span>
+      </div>
+      <div class="grid-contact">
+        <div class="contact-card">
+          <h3><span class="cs">💬</span>微信</h3>
+          <div class="val" id="wxVal">yiqiexiangeifutao</div>
+          <div class="row">
+            <button class="btn-mini btn-copy" data-copy="yiqiexiangeifutao">复制微信号</button>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h3><span class="cs">📧</span>邮箱</h3>
+          <div class="val" id="mailVal">2794049147@qq.com</div>
+          <div class="row">
+            <button class="btn-mini btn-copy" data-copy="2794049147@qq.com">复制邮箱</button>
+            <button class="btn-mini btn-go" onclick="location.href='mailto:2794049147@qq.com'">直接发邮件</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © 2026 凪琉 <span class="fx">✧</span> 二次元个人主页 <span class="gx">✦</span><br>
+    欢迎扩扩 · 深交亲友位常驻 <span class="fx">♥</span> · 由凪琉手工打造
+  </footer>
+
+</div>
+
+<div id="toast">已复制到剪贴板 ✧</div>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   ★ 内容速改区（改引号里的字即可，其他不用动）
+   ════════════════════════════════════════════════════════ */
+const CONFIG = {
+  wx: "yiqiexiangeifutao",          // 微信号
+  mail: "2794049147@qq.com"          // 邮箱
+};
+
+/* ---------- 漂浮装饰：星星 + 光点（数量克制，动效缓慢） ---------- */
+(function(){
+  const deco = document.getElementById("deco");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) return;
+  const starChars = ["✦","✧","✦","✧","·"];
+  for (let i = 0; i < 18; i++){
+    const s = document.createElement("span");
+    const isDust = i % 5 === 4; // 每5个里1个是光点
+    if (isDust){
+      s.className = "dust";
+      s.style.left = Math.random()*100 + "vw";
+      s.style.top = (30 + Math.random()*70) + "vh";
+      s.style.setProperty("--dur", (9 + Math.random()*6) + "s");
+      s.style.animationDelay = (-Math.random()*14) + "s";
+      if (Math.random() < .5) s.style.background = "rgba(139,136,255,.8)";
+    } else {
+      s.className = "star";
+      s.textContent = starChars[i % starChars.length];
+      s.style.left = Math.random()*100 + "vw";
+      s.style.top = Math.random()*100 + "vh";
+      s.style.fontSize = (7 + Math.random()*9) + "px";
+      s.style.color = Math.random() < .72 ? "" : "#ffb7d8";
+      s.style.setProperty("--dur", (4 + Math.random()*5) + "s");
+      s.style.animationDelay = (-Math.random()*8) + "s";
+    }
+    deco.appendChild(s);
+  }
+  /* Hero 内部装饰：星星 + 虚线圆环 */
+  const hero = document.getElementById("hero");
+  const pos = [[8,14],[88,10],[78,72],[14,66],[50,88],[92,40],[6,42],[68,24]];
+  pos.forEach((p, i) => {
+    const st = document.createElement("span");
+    st.className = "h-star";
+    st.textContent = i % 2 ? "✧" : "✦";
+    st.style.left = p[0] + "%"; st.style.top = p[1] + "%";
+    st.style.fontSize = (8 + (i%3)*4) + "px";
+    st.style.animationDelay = (-i*1.1) + "s";
+    hero.appendChild(st);
+  });
+  const r1 = document.createElement("span");
+  r1.className = "h-ring";
+  r1.style.cssText = "width:200px;height:200px;top:-60px;right:-46px";
+  const r2 = document.createElement("span");
+  r2.className = "h-ring";
+  r2.style.cssText = "width:120px;height:120px;bottom:-40px;left:-30px;animation-delay:-7s";
+  hero.appendChild(r1); hero.appendChild(r2);
+})();
+
+/* ---------- 复制功能 + toast ---------- */
+let toastTimer = null;
+function showToast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+}
+function copyText(text, okMsg){
+  const done = () => showToast(okMsg || "已复制到剪贴板 ✧");
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+function fallbackCopy(text, done){ // file:// 打开时的后备方案
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.cssText = "position:fixed;opacity:0;top:0;left:0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch(e){ showToast("复制失败，请手动复制 ⚠"); }
+  document.body.removeChild(ta);
+}
+document.querySelectorAll("[data-copy]").forEach(btn => {
+  btn.addEventListener("click", () => copyText(btn.dataset.copy));
+});
+
+/* Hero CTA：点击复制微信号 */
+document.getElementById("ctaWx").addEventListener("click", () => {
+  copyText(CONFIG.wx, "微信号已复制，快去添加吧 ✧");
+});
+</script>
+</body>
+</html>
