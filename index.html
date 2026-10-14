@@ -365,6 +365,24 @@ img{max-width:100%}
   padding:3px 12px;border-radius:999px;
 }
 
+/* 拍摄声明（与板块同源的低调渐变卡） */
+.shoot-note{
+  display:flex;align-items:center;gap:13px;
+  margin-top:16px;padding:14px 18px;border-radius:16px;
+  background:
+    radial-gradient(280px 110px at 10% 50%, rgba(255,168,212,.12), transparent 70%),
+    linear-gradient(rgba(30,28,64,.88),rgba(26,24,56,.9)) padding-box,
+    linear-gradient(120deg,rgba(156,153,255,.5),rgba(255,168,212,.5),rgba(156,153,255,.5)) border-box;
+  border:1.5px solid transparent;
+}
+.shoot-note .cam{
+  flex:none;font-size:20px;
+  filter:drop-shadow(0 0 6px rgba(255,168,212,.6));
+  opacity:.9;
+}
+.shoot-note .txt{font-size:12.5px;color:var(--sub);letter-spacing:1.2px;line-height:1.8}
+.shoot-note .txt b{color:#ffd9ec;font-weight:700}
+
 /* 社交条目 */
 .social-list{display:grid;gap:11px}
 .social-item{
@@ -801,6 +819,10 @@ img{max-width:100%}
         <div class="car-cap" id="carCap"></div>
         <div class="car-dots" id="carDots"></div>
       </div>
+        <div class="shoot-note">
+          <span class="cam">📷</span>
+          <span class="txt">以上均为<b>真实出C实拍</b>、非AI生成；若平台仍显示AI相关角标，系传输工具误标的元数据所致，与照片内容无关</span>
+        </div>
     </div>
   </section>
 
